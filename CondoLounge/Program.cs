@@ -2,10 +2,11 @@ using CondoLounge.Data.Entities;
 using CondoLounge.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CondoLounge.Data.Repositories.Helpers;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,25 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
+        builder.Services.AddTransient<CondoLoungeSeeder>();
+
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
+
         var app = builder.Build();
+
+        await RunSeeding(app);
+
+        async Task RunSeeding(WebApplication app)
+        {
+            var scopeFactory = app.Services.GetService<IServiceScopeFactory>();
+
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetService<CondoLoungeSeeder>();
+                await seeder.Seed();
+            }
+        }
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())

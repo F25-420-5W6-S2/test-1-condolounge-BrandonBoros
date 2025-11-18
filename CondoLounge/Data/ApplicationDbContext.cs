@@ -13,7 +13,7 @@ namespace CondoLounge.Data
         }
 
         public DbSet<Building> Buildings { get; set; }
-        public DbSet<Condo> Condo { get; set; }
+        public DbSet<Condo> Condos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
