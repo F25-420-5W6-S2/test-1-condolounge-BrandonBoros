@@ -1,0 +1,9 @@
+﻿namespace CondoLounge.Data.Entities
+{
+    public class Building
+    {
+        public int Id { get; set; }
+        public required string Name { get; set; }
+        public string? Address { get; set; }
+    }
+}

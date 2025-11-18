@@ -11,7 +11,10 @@ namespace CondoLounge.Data
             : base(options)
         {
         }
-        
+
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Condo> Condo { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
