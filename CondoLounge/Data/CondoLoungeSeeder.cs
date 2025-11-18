@@ -34,9 +34,13 @@ namespace CondoLounge.Data
             // add users if theres none
             if (!_userManager.Users.Any())
             {
-                var user = new ApplicationUser() { UserName = "admin@email.com", Email = "admin@email.com"};                
-                await _userManager.CreateAsync(user, "VerySecureAdmin45%");  
-                await _userManager.AddToRoleAsync(user, "Admin");
+                var adminUser = new ApplicationUser() { UserName = "admin@email.com", Email = "admin@email.com"};                
+                await _userManager.CreateAsync(adminUser, "VerySecureAdmin45%");  
+                await _userManager.AddToRoleAsync(adminUser, "Admin");
+
+                var normalUser = new ApplicationUser() { UserName = "normal@email.com", Email = "normal@email.com" };
+                await _userManager.CreateAsync(normalUser, "VerySecureNormal45%");
+                await _userManager.AddToRoleAsync(normalUser, "Default");
             }
 
             // populates condos if none
@@ -78,6 +82,17 @@ namespace CondoLounge.Data
                     },
                 };
 
+                // user lists to add to the building
+                var users = new List<ApplicationUser>()
+                {
+                    _userManager.Users.First()
+                };
+
+                var users2 = new List<ApplicationUser>()
+                {
+                    _userManager.Users.OrderByDescending(u => u.UserName).First(),
+                };
+
                 // create sample buildings
                 var buildings = new List<Building>()
                 {
@@ -85,11 +100,13 @@ namespace CondoLounge.Data
                     {
                         Name = "BESTCONDO",
                         Condos = condos,
+                        Users = users
                     },
                     new Building()
                     {
                         Name = "CondoPlus",
                         Condos = condos2,
+                        Users = users2
                     }
                 };
                     

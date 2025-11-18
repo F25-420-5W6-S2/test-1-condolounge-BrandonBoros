@@ -8,5 +8,10 @@ namespace CondoLounge.Data.Repositories
         public CondoLoungeCondoRepository(ApplicationDbContext db, ILogger<CondoLoungeGenericGenericRepository<Condo>> logger) : base(db, logger)
         {
         }
+
+        public IEnumerable<Condo> GetAllCondosInBuilding(int building)
+        {
+            return _dbSet.Where(c => c.BuildingId == building).ToList();
+        }
     }
 }

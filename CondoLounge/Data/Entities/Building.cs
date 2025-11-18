@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public required string Name { get; set; }
         public string? Address { get; set; }
+        public required ICollection<ApplicationUser> Users { get; set; }
         public required ICollection<Condo> Condos { get; set; }
     }
 }
