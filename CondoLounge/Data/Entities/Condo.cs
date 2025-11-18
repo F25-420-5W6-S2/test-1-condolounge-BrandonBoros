@@ -10,5 +10,8 @@ namespace CondoLounge.Data.Entities
         
         [ForeignKey("BuildingId")]
         public int BuildingId { get; set; }
+
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
     }
 }

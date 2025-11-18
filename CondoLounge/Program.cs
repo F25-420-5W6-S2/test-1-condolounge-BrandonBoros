@@ -43,6 +43,8 @@ internal class Program
             }
         }
 
+        app.MapRazorPages();
+
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {

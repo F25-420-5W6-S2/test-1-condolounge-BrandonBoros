@@ -40,6 +40,9 @@ namespace CondoLounge.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CondoNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -127,6 +130,9 @@ namespace CondoLounge.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CondoNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
